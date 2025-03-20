@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Role;
 use App\Models\User;
 
 
@@ -31,4 +32,16 @@ class UserRepository
 
         return response()->json($user);
     }
+
+    public function isAdmin(User $user): bool
+    {
+        $adminRole = Role::where('name', 'Administrador')->first();
+
+        if (!$adminRole) {
+            return false;
+        }
+
+        return $user->roles->contains($adminRole);
+    }
+
 }
