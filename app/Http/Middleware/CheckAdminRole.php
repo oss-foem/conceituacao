@@ -20,7 +20,7 @@ class CheckAdminRole
     {
         $user = auth('api')->user();
         // dd($user);
-        if (!$user || !$this->userRepository->isAdmin($user)) {
+        if (!$user || !$this->userRepository->isAdmin($user->id)) {
             return response()->json([
                 'message' => 'Access denied. Only administrators can perform this operation.'
             ], 403);

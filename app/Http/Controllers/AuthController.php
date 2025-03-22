@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Models\User;
 use App\Repositories\UserRepository;
+use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
+        $this->userRepository = $userRepository;
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $credentials = $request->validated();
 
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(
-                ['error' => 'Unauthorized'
+                ['error' => 'The provided credentials are invalid.'
             ], 401);
         }
 
@@ -32,7 +36,7 @@ class AuthController extends Controller
 
             if (!$token) {
                 return response()->json([
-                    'message' => 'User already logged out'], 200);
+                    'message' => 'User already logged out'], 401);
             }
 
         JWTAuth::invalidate(JWTAuth::getToken());
@@ -45,19 +49,11 @@ class AuthController extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|confirmed'
-        ]);
+        $data = $request->validated();
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = $this->userRepository->create($data);
 
         return response()->json([
             'message' => 'User successfully registered',
