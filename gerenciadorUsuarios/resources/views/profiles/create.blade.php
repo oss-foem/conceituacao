@@ -1,15 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Controle de Usuários') }}
-        </h2>
-    </x-slot>
-
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <div class="max-w-7xl mx-auto p-6 lg:p-8">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <div class="max-w-7xl mx-auto p-6 lg:p-8">
                         <div class="flex justify-center">
                             <a href="http://127.0.0.1:8000/dashboard">
                                 <svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 fill-current text-gray-500">
@@ -45,7 +39,7 @@
                             </a>
                         </div>
 
-                        <!-- Versão do Laravel e PHP --> 
+                        <!-- Versão do Laravel e PHP -->
                         <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
                             <div class="text-center text-sm sm:text-left">
                                 &nbsp;

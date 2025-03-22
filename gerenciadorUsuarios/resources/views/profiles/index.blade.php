@@ -1,10 +1,5 @@
 <x-app-layout>
     <script src="https://cdn.tailwindcss.com"></script>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Controle de Usuários') }}
-        </h2>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -38,7 +33,7 @@
                                             <td class="px-4 py-2">{{ $profile->name }}</td>
                                             <td class="px-4 py-2">{{ $profile->description }}</td>
                                             <td class="px-4 py-2">
-                                            <a href="{{ route('profiles.edit', $profile->id) }}" class="text-red-500 hover:text-red-600 hover:underline mr-5">Editar</a>
+                                                <a href="{{ route('profiles.edit', $profile->id) }}" class="text-red-500 hover:text-red-600 hover:underline mr-5">Editar</a>
                                                 <form action="{{ route('profiles.destroy', $profile->id) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     @method('DELETE')
@@ -61,7 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
