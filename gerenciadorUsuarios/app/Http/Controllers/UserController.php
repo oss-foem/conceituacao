@@ -1,13 +1,12 @@
 <?php
 
-// UserController.php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -66,7 +65,12 @@ class UserController extends Controller
 
         $user->profiles()->sync($request->input('profiles', []));
         
-        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso.');
+        if(Gate::allows('no-profile', $user)){
+            return redirect()->route('dashboard')->with('success', 'Usuário atualizado com sucesso.');
+        }else{
+            return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso.');
+        }
+        
     }
 
     public function destroy(User $user)
