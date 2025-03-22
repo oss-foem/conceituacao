@@ -75,13 +75,6 @@ Este projeto é uma aplicação desenvolvida em Laravel destinada ao gerenciamen
    ```sh
    php artisan serve
    ```
-4. ! Caso necessário instale as dependências do Vite: !
-   ```sh
-   npm install
-   npm run dev
-   npm run build
-   composer install
-   ```
 
 ---
 
