@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Request;
 class UserRepository
 {
     protected $model;
-    protected $userRepository;
 
     public function __construct(User $user)
     {
@@ -76,6 +75,7 @@ class UserRepository
     {
         $user = $this->model->find($id);
         $user->delete();
+        
         return $user;
     }
 
