@@ -84,6 +84,12 @@ class Usuario extends Controller
     }
 
     public function Excluir(Request $request, $id) {
+        $objSession =  $request->session()->all();;
+        if(empty($objSession['Authenticado'])) {
+             $request->session()->forget('Authenticado');
+             return redirect('/');
+        }
+
         try{
             $objUsuario = new ModelUsuario();
             $objUsuario->excluir($id);
@@ -99,6 +105,12 @@ class Usuario extends Controller
     }
 
     public function Salvar(Request $request) {
+        $objSession =  $request->session()->all();;
+        if(empty($objSession['Authenticado'])) {
+             $request->session()->forget('Authenticado');
+             return redirect('/');
+        }
+        
         try {
             $idUsuario = $request->get('COD_USUARIO');
             $arrDados = [
