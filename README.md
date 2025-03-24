@@ -1,83 +1,58 @@
-## **Objetivo**
-Criar uma aplicação Laravel para gerenciar usuários e seus perfis, onde cada usuário pode ter múltiplos perfis. O objetivo é avaliar suas habilidades em PHP, Laravel, e boas práticas de desenvolvimento.
+## Projeto Laravel - Dashboard 
 
----
+### Descrição do Projeto
+Este é um projeto da painel administrador, com foco na criação e gerenciamento de usuários e suas permissões (roles). A partir de uma API onde utilizamos JWT para autenticação de usuários, podemos gerir todas as regras e usuários cadastrados, assim como fazer novos cadastros. Utilizamos um banco de dados MySQL para armazenar os dados de usuários e roles.
 
-## **Requisitos**
+## Passos para Configurar o Ambiente
 
-1. **Autenticação de Usuário**:
-   - Implementar um sistema de autenticação que permita o registro, login e logout de usuários.
+```
+git clone https://link-do-seu-repositorio.git
+cd nome-do-repositorio
+```
+### Instalar as dependências:
+`composer install `
 
-2. **Gerenciamento de Usuários**:
-   - Criar um módulo para gerenciar usuários, com as seguintes operações:
-     - Criar
-     - Editar
-     - Excluir
-     - Listar
-    
-   - Validação: Deve impedir o usuário de cadastrar se não fornecer essas informações
-     - name: obrigatório
-     - email: obrigatório
+### Configurar o arquivo .env
+Copie o arquivo de exemplo .env.example para criar o seu próprio .env:
+`cp .env.example .env`- Para terminais linux
+ou utilize o método de copiar tradicional do windows.
 
-3. **Gerenciamento de Perfis**:
-   - Criar um módulo para gerenciar perfis, com as seguintes operações:
-     - Criar
-     - Editar
-     - Excluir
-     - Listar
-    
-  - Validação: Deve impedir o usuário de cadastrar se não fornecer essas informações
-   - perfil: obrigatório
+Abra o arquivo .env e configure as variáveis do banco de dados conforme a configuração do seu ambiente local. Exemplo:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
+### Gere a chave da aplicação
+`php artisan key:generate`
 
-4. **Cadastrar Perfil Administrador automaticamente (seeder)**:
+### Gere a chave JWT para autenticação
+`php artisan jwt:secret`
 
-5. **Relacionamento Usuário-Perfis**:
-   - Um usuário pode ter múltiplos perfis (relacionamento muitos-para-muitos).
-   - Criar uma funcionalidade para associar/desassociar perfis a usuários.
-   - Listar os perfis de um usuário.
+### Crie o banco de dados
+Acesse o mysql como user root e crie o banco antes de rodar as migrations.
+`mysql -u root -p`
+`CREATE DATABASE seu_banco`
 
-6. **Controle de Acesso**:
-   - Apenas usuários autenticados podem acessar o sistema.
-   - Apenas usuários com o perfil "Administrador" podem gerenciar perfis e associações.
+É importante conceder privilégios ao usuário que vamos utilizar (que está no arquivo .env)
+```
+GRANT ALL PRIVILEGES ON laravel.* TO 'seu_user'@'localhost' IDENTIFIED BY 'sua_senha';
+FLUSH PRIVILEGES;
+```
 
----
+### Rodar as migrations
+`php artisan migrate`
 
-## **Entrega**
+### Rodas as seeds
+`php artisan db:seed` 
 
-1. **Repositório**:
-   - Atualize esse repositório.
+### Iniciar o servidor
+`php artisan serve`
 
-2. **README-novo do Projeto**:
-   - Crie um novo Readme "Readme-novo.md"
-   - Inclua as seguintes informações:
-     - Descrição do projeto.
-     - Passos para configurar o ambiente.
-     - Como rodar as migrations e seeders.
-     - Usuário e senha de teste para login.
+### Logar como user padrão 
+user: `admin@example.com`
+senha: `password`
 
-4. **Pontos de Verificação**:
-   - O sistema deve atender a todos os requisitos mencionados.
-
----
-
-## **Critérios de Avaliação**
-
-1. **Funcionamento**:
-   - A aplicação atende a todos os requisitos funcionais descritos?
-
-2. **Interface e Usabilidade**:
-   - A aplicação possui uma interface clara e funcional?
-
-3. **Código**:
-   - O código é legível.
-
----
-
-## **Configuração do Projeto**
-
-### **Requisitos**
-- PHP >= 8.0
-- Composer
-- Banco de dados relacional (MySQL, Sqlite, PostgreSQL ou outro compatível com Laravel)
-- Laravel >= 10.x
-- Frontend - Livre escolha
