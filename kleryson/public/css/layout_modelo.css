@@ -1,0 +1,28 @@
+.form-error {
+	color: red;
+}
+
+div.cabecalho{
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #030;
+	color: #FFF;
+}
+
+div.linhas {
+	padding: 10px;
+	color: #000;
+}
+
+.ativo {
+	size: 24px;
+	color: #060;
+}
+
+.old{
+	background-color: #FFF;
+}
+
+.even{
+	background-color: #FFC;
+}

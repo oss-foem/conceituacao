@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700');
+.nav li {
+  list-style: none;
+  padding: 5px 10px;
+}
+.nav li a {
+ font-family: 'Lora', serif;
+  list-style: none;
+  padding: 5px 10px;
+  color:#222;
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:14px;
+  text-decoration:none;
+ -webkit-transition: all 0.5s ease-in-out;
+-moz-transition: all 0.5s ease-in-out;
+-ms-transition: all 0.5s ease-in-out;
+-o-transition: all 0.5s ease-in-out;
+transition: all 0.5s ease-in-out;
+}
+.nav li a:hover {
+  list-style: none;
+  padding: 5px 10px;
+  color:#222;
+  background:#fff;
+  text-decoration:none;
+}
+.nav > li {
+  float: left;
+  width:auto;
+}
+.nav .sub-menu {
+  background:#eee;
+  margin:0;
+  padding:10px 0;
+  display: none;
+}
