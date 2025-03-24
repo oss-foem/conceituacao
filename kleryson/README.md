@@ -19,3 +19,6 @@ php artisan migrate
 
 php artisan db:seed --class=usuarioADM
 
+## Logar 
+usuario: admin
+senha: admin
