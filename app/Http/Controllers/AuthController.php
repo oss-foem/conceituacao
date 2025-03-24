@@ -26,7 +26,8 @@ class AuthController extends Controller
             ], 401);
         }
 
-        return response()->json(compact('token'));
+        return response()->json(['token' => $token, 'user' => auth()->user()])
+        ->cookie('jwt_token', $token, 60 * 24, '/', null, true, false);
     }
 
     public function logout()

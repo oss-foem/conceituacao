@@ -19,11 +19,16 @@ class CheckAdminRole
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth('api')->user();
-        // dd($user);
+
         if (!$user || !$this->userRepository->isAdmin($user->id)) {
-            return response()->json([
-                'message' => 'Access denied. Only administrators can perform this operation.'
-            ], 403);
+            if ($request->expectsJson() || $request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Access denied. Only administrators can perform this operation.'
+                ], 403);
+            } else {
+                return redirect()->route('login.form')
+                    ->with('error', 'Acesso negado. Apenas administradores podem acessar esta página.');
+            }
         }
 
         return $next($request);

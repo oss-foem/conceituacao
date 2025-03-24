@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'check-admin-role' => \App\Http\Middleware\CheckAdminRole::class,
+        'web.jwt.auth' => \App\Http\Middleware\WebJwtAuth::class,
     ];
 }

@@ -1,5 +1,4 @@
-use App\Http\Controllers\RoleController;
-    <?php
+<?php
 
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\AuthController;
@@ -37,11 +36,10 @@ use App\Http\Controllers\RoleController;
 
             Route::get('/is-admin/{user}', [UserController::class, 'isAdmin']);
 
-            // Rotas dos perfis
-            Route::get('/roles', [RoleController::class, 'index']); // Listar perfis
-            Route::post('/roles', [RoleController::class, 'store']); // Criar perfil
-            Route::put('/roles/{role}', [RoleController::class, 'update']); // Editar perfil
-            Route::delete('/roles/{role}', [RoleController::class, 'destroy']); // Excluir perfil
+            Route::get('/roles', [RoleController::class, 'index']);
+            Route::post('/roles', [RoleController::class, 'store']);
+            Route::put('/roles/{role}', [RoleController::class, 'update']);
+            Route::delete('/roles/{role}', [RoleController::class, 'destroy']);
 
         });
     });

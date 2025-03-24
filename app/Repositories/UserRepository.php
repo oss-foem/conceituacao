@@ -75,7 +75,7 @@ class UserRepository
     {
         $user = $this->model->find($id);
         $user->delete();
-        
+
         return $user;
     }
 

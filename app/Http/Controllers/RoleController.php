@@ -55,4 +55,11 @@ class RoleController extends Controller
             'role' => $deletedRole
         ], 200);
     }
+
+    public function show(Role $role)
+    {
+        $role->load('permissions');
+
+        return view('roles.show', compact('role'));
+    }
 }

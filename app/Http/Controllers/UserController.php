@@ -35,6 +35,12 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function showUser(User $user)
+    {
+        $user->load('roles');
+        return view('users.show', compact('user'));
+    }
+
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
@@ -55,6 +61,11 @@ class UserController extends Controller
             'message' => 'User updated successfully',
             'user' => $user
         ], 200);
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
     }
 
     public function destroy(User $user)
