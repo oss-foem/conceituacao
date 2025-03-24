@@ -10,17 +10,26 @@ use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
+    /**
+     * Exibe a lista de todos os usuários.
+     */
     public function index()
     {
         $users = User::all();
         return view('users.index', compact('users'));
     }
 
+    /**
+     * Exibe o formulário para criar um novo usuário.
+     */
     public function create()
     {
         return view('auth.register');
     }
 
+    /**
+     * Armazena um novo usuário no banco de dados.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -43,12 +52,18 @@ class UserController extends Controller
         
     }
 
+    /**
+     * Exibe o formulário para editar um usuário.
+     */
     public function edit(User $user)
     {
         $allProfiles = Profile::all();
         return view('users.edit', compact('user', 'allProfiles'));
     }
 
+    /**
+     * Atualiza um usuário no banco de dados.
+     */
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -73,18 +88,27 @@ class UserController extends Controller
         
     }
 
+    /**
+     * Remove um usuário do banco de dados.
+     */
     public function destroy(User $user)
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso.');
     }
 
+    /**
+    * Exibe os perfis associados a um usuário.
+    */
     public function profiles(User $user)
     {
         $profiles = $user->profiles;
         return view('users.profiles', compact('user', 'profiles'));
     }
 
+    /**
+     * Associa um perfil a um usuário.
+     */
     public function attachProfile(Request $request, User $user)
     {
         $request->validate([
@@ -95,6 +119,9 @@ class UserController extends Controller
         return redirect()->route('users.profiles', $user->id)->with('success', 'Perfil associado com sucesso.');
     }
 
+    /**
+     * Desassocia um perfil de um usuário.
+     */
     public function detachProfile(User $user, $profileId)
     {
         $user->profiles()->detach($profileId);

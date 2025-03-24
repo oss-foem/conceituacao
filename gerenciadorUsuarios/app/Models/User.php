@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
+    /**
+        * Atributos
+    */
     protected $fillable = [
         'name',
         'email',
@@ -14,14 +17,14 @@ class User extends Authenticatable
     ];
 
     /**
-        * Verficação se o usuario possui um perfil de Administrador para acesso ao sistema de gereciamento de perfis
+        * Verficação se o usuario possui um perfil de Administrador 
     */
     public function isAdmin(){
         return $this->profiles->contains('name', 'Administrador');
     }
 
     /**
-        * Verficação se o usuario possui um perfil de Gerente para cadastrar novos usuários
+        * Verficação se o usuario possui um perfil de Gerente 
     */
     public function isManager(){
         return $this->profiles->contains(function($profile){
@@ -37,7 +40,7 @@ class User extends Authenticatable
     }
 
     /**
-        * Relação muitos-para-muitos com perfis
+        * Obtém os perfis que pertencem a este usuário.
     */
     public function profiles(): BelongsToMany
     {

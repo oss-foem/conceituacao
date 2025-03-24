@@ -23,17 +23,26 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //gate de administrador
+        /**
+         * Define a permissão 'is-administrator'.
+         * Retorna verdadeiro se o usuário for administrador.
+         */
         Gate::define('is-administrator', function ($user) {
             return $user->isAdmin();
         });
 
-        //gate de gerente
+        /**
+         * Define a permissão 'is-manager'.
+         * Retorna verdadeiro se o usuário for gerente.
+         */
         Gate::define('is-manager', function ($user) {
             return $user->isManager();
         });
 
-        //gate de usuário sem perfil
+        /**
+         * Define a permissão 'no-profile'.
+         * Retorna verdadeiro se o usuário não tiver um perfil associado.
+         */
         Gate::define('no-profile', function ($user) {
             return $user->noProfile();
         });
