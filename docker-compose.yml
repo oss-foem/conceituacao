@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./api:/var/www
+      - /var/www/vendor 
+    networks:
+      - laravel
+    command: >
+      sh -c "chmod -R 775 storage bootstrap/cache &&
+            chown -R www-data:www-data storage bootstrap/cache &&
+            php-fpm"
+
+  db:
+    image: mysql:5.7
+    container_name: laravel_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - laravel
+
+  webserver:
+    image: nginx:alpine
+    container_name: laravel_webserver
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./api:/var/www
+      - ./api/docker/nginx:/etc/nginx/conf.d
+    networks:
+      - laravel
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vue_frontend
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    networks:
+      - laravel
+
+volumes:
+  dbdata:
+    driver: local
+
+networks:
+  laravel:
+    driver: bridge
